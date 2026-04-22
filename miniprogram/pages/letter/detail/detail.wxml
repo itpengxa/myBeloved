@@ -1,0 +1,38 @@
+<view class="container" wx:if="{{letter}}">
+  <view class="letter-card card">
+    <view class="letter-header">
+      <view class="letter-title">💌 专属情书</view>
+      <view class="letter-subtitle">{{letter.send_date}} · {{letter.sender_nickname}} 写给 {{letter.receiver_nickname}}</view>
+    </view>
+
+    <view class="letter-body">
+      <text>{{letter.letter_content}}</text>
+    </view>
+  </view>
+
+  <view class="recommend-card card" wx:if="{{letter.food_recommend}}">
+    <view class="rec-section">
+      <view class="rec-title">🍽️ 本周美食推荐</view>
+      <view class="rec-name">{{letter.food_recommend.name}}</view>
+      <view class="rec-place">推荐餐厅：{{letter.food_recommend.restaurant}}</view>
+      <view class="rec-reason">{{letter.food_recommend.reason}}</view>
+    </view>
+
+    <view class="rec-section" wx:if="{{letter.activity_recommend}}">
+      <view class="rec-title">🎯 本周活动推荐</view>
+      <view class="rec-name">{{letter.activity_recommend.name}}</view>
+      <view class="rec-place">地点：{{letter.activity_recommend.location}}</view>
+      <view class="rec-reason">{{letter.activity_recommend.reason}}</view>
+    </view>
+
+    <view class="rec-section" wx:if="{{letter.todo_list && letter.todo_list.length > 0}}">
+      <view class="rec-title">✅ 本周必做清单</view>
+      <view class="todo-item" wx:for="{{letter.todo_list}}" wx:key="*this">
+        <text class="todo-check">☐</text>
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中...</view>

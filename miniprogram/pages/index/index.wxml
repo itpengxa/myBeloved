@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="header-card card">
+    <view class="user-info" wx:if="{{userInfo}}">
+      <image class="avatar" src="{{userInfo.avatar_url || '/images/default-avatar.png'}}" mode="aspectFill"/>
+      <view class="user-meta">
+        <text class="nickname">{{userInfo.nickname || '心上人'}}</text>
+        <text class="welcome">欢迎回来~</text>
+      </view>
+    </view>
+    <view class="love-days" wx:if="{{partnerInfo}}">
+      <view class="days-number">{{loveDays}}</view>
+      <view class="days-label">在一起 {{loveDays}} 天</view>
+    </view>
+    <view class="bind-tips" wx:if="{{!partnerInfo}}" bindtap="goToBind">
+      <text>还未绑定对象，点击绑定</text>
+      <text class="arrow">→</text>
+    </view>
+  </view>
+
+  <view class="letter-card card" wx:if="{{latestLetter}}" bindtap="goToLetterDetail">
+    <view class="letter-header">
+      <text class="letter-icon">💌</text>
+      <text class="letter-title">本周情书</text>
+    </view>
+    <view class="letter-preview">{{latestLetter.letter_content}}</view>
+    <view class="letter-action">点击查看完整内容 →</view>
+  </view>
+
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goToMomentEdit">
+      <view class="action-icon">📝</view>
+      <text>记点滴</text>
+    </view>
+    <view class="action-item" bindtap="goToReminderList">
+      <view class="action-icon">⏰</view>
+      <text>设提醒</text>
+    </view>
+    <view class="action-item" bindtap="goToPartner">
+      <view class="action-icon">🍽️</view>
+      <text>找美食</text>
+    </view>
+  </view>
+
+  <view class="section-title">最近点滴</view>
+
+  <view class="moment-list">
+    <view class="moment-card card" wx:for="{{moments}}" wx:key="id" bindtap="goToMomentDetail" data-id="{{item.id}}">
+      <view class="moment-images" wx:if="{{item.images && item.images.length > 0}}">
+        <image class="moment-image" src="{{item.images[0]}}?x-oss-process=image/resize,w_800" mode="aspectFill"/>
+      </view>
+      <view class="moment-content">{{item.content}}</view>
+      <view class="moment-meta">
+        <text class="moment-date">{{item.created_at}}</text>
+        <text class="moment-likes" wx:if="{{item.like_count > 0}}">❤️ {{item.like_count}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && moments.length === 0}}">
+    <text>还没有记录点滴，快去记录第一个美好瞬间吧~</text>
+  </view>
+</view>

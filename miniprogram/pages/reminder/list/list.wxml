@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="reminder-card card" wx:for="{{reminders}}" wx:key="id">
+    <view class="reminder-header flex-between">
+      <view class="reminder-title">{{item.title}}</view>
+      <view class="reminder-type">
+        <text class="tag">{{typeNames[item.reminder_type]}}</text>
+      </view>
+    </view>
+
+    <view class="reminder-info">
+      <view class="info-row">
+        <text class="info-label">日期：</text>
+        <text>{{item.target_date}} {{item.is_lunar ? '(农历)' : ''}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">提前：</text>
+        <text>{{item.advance_days}}天</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">通知时间：</text>
+        <text>{{item.notify_time}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">重复：</text>
+        <text>{{repeatNames[item.repeat_type]}}</text>
+      </view>
+    </view>
+
+    <view class="reminder-actions flex-between">
+      <view class="status-toggle {{item.status === 1 ? 'on' : 'off'}}" bindtap="toggleStatus" data-id="{{item.id}}" data-status="{{item.status}}">
+        {{item.status === 1 ? '已开启' : '已关闭'}}
+      </view>
+      <view class="action-btns">
+        <text class="action-btn" bindtap="goToEdit" data-id="{{item.id}}">编辑</text>
+        <text class="action-btn delete" bindtap="deleteReminder" data-id="{{item.id}}">删除</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && reminders.length === 0}}">
+    <text>还没有设置提醒</text>
+  </view>
+
+  <view class="fab" bindtap="goToEdit">
+    <text class="fab-icon">+</text>
+  </view>
+</view>

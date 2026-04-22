@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="card">
+    <textarea class="content-input" placeholder="记录今天的美好瞬间..." maxlength="2000" bindinput="onContentInput" value="{{content}}"/>
+    <view class="char-count">{{content.length}}/2000</view>
+  </view>
+
+  <view class="card">
+    <view class="image-section-title">添加图片</view>
+    <view class="image-grid">
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image class="preview-image" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"/>
+        <view class="image-remove" bindtap="removeImage" data-index="{{index}}">×</view>
+      </view>
+      <view class="image-add" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-item" bindtap="chooseLocation">
+      <text class="setting-label">📍 位置</text>
+      <text class="setting-value">{{location || '添加位置'}}</text>
+    </view>
+
+    <view class="setting-item">
+      <text class="setting-label">😊 心情</text>
+      <view class="mood-options">
+        <text class="mood-item {{mood === item ? 'active' : ''}}" wx:for="{{moods}}" wx:key="*this" bindtap="selectMood" data-mood="{{item}}">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="setting-item">
+      <text class="setting-label">🔒 可见范围</text>
+      <view class="privacy-options">
+        <view class="privacy-item {{isShared === 0 ? 'active' : ''}}" bindtap="setPrivacy" data-value="0">
+          <text>仅自己</text>
+        </view>
+        <view class="privacy-item {{isShared === 1 ? 'active' : ''}}" bindtap="setPrivacy" data-value="1">
+          <text>双方可见</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn btn-primary btn-block mt-24" bindtap="submit">
+    {{submitting ? '发布中...' : '发布'}}
+  </view>
+</view>

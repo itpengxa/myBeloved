@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="bind-card card" wx:if="{{!hasBindCode}}">
+    <view class="bind-title">生成绑定码</view>
+    <view class="bind-desc">生成6位数字绑定码，发送给TA输入即可绑定</view>
+    <input class="bind-input" placeholder="留一段绑定留言（可选）" bindinput="onMsgInput" value="{{bindMsg}}" />
+    <view class="btn btn-primary btn-block mt-24" bindtap="generateCode">生成绑定码</view>
+  </view>
+
+  <view class="bind-card card code-card" wx:if="{{hasBindCode}}">
+    <view class="code-label">绑定码</view>
+    <view class="code-number">{{bindCode}}</view>
+    <view class="code-tips">有效期24小时，请尽快分享给TA</view>
+    <view class="btn btn-default btn-block mt-16" bindtap="copyCode">复制绑定码</view>
+    <view class="btn btn-primary btn-block mt-16" bindtap="shareCode">分享给TA</view>
+  </view>
+
+  <view class="divider">或</view>
+
+  <view class="bind-card card">
+    <view class="bind-title">输入绑定码</view>
+    <view class="bind-desc">收到TA的绑定码后，在此输入完成绑定</view>
+    <input class="bind-input" type="number" maxlength="6" placeholder="请输入6位绑定码" bindinput="onCodeInput" value="{{inputCode}}" />
+    <view class="btn btn-primary btn-block mt-24" bindtap="bindByCode">确认绑定</view>
+  </view>
+</view>

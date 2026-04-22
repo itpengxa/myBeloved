@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="form-label">提醒标题</text>
+      <input class="form-input" placeholder="例如：TA的生日" bindinput="onInput" data-field="title" value="{{form.title}}"/>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">提醒类型</text>
+      <picker mode="selector" range="{{typeOptions}}" range-key="label" bindchange="onTypeChange" value="{{form.reminderType - 1}}">
+        <view class="picker-value">{{typeOptions[form.reminderType - 1]?.label || '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">目标日期</text>
+      <picker mode="date" bindchange="onDateChange" value="{{form.targetDate}}">
+        <view class="picker-value">{{form.targetDate || '请选择日期'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">农历</text>
+      <switch checked="{{form.isLunar === 1}}" bindchange="onLunarChange" color="#ff6b81"/>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">提前天数</text>
+      <slider min="0" max="30" value="{{form.advanceDays}}" show-value bindchange="onAdvanceChange" activeColor="#ff6b81"/>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">通知时间</text>
+      <picker mode="time" bindchange="onTimeChange" value="{{form.notifyTime}}">
+        <view class="picker-value">{{form.notifyTime || '09:00'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">重复周期</text>
+      <picker mode="selector" range="{{repeatOptions}}" range-key="label" bindchange="onRepeatChange" value="{{form.repeatType}}">
+        <view class="picker-value">{{repeatOptions[form.repeatType]?.label || '请选择'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">通知对象</text>
+      <view class="radio-group">
+        <view class="radio-item {{form.notifyTarget === 1 ? 'active' : ''}}" bindtap="setNotifyTarget" data-value="1">仅自己</view>
+        <view class="radio-item {{form.notifyTarget === 2 ? 'active' : ''}}" bindtap="setNotifyTarget" data-value="2">仅对象</view>
+        <view class="radio-item {{form.notifyTarget === 3 ? 'active' : ''}}" bindtap="setNotifyTarget" data-value="3">双方</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn btn-primary btn-block mt-24" bindtap="submit">
+    {{isEdit ? '保存' : '添加'}}
+  </view>
+</view>

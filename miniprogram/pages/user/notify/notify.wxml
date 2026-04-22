@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="card">
+    <view class="notify-section">
+      <view class="section-title">通知频率</view>
+
+      <view class="notify-item">
+        <text class="notify-label">每日通知</text>
+        <switch checked="{{settings.dailyNotify === 1}}" bindchange="toggleDaily" color="#ff6b81"/>
+      </view>
+
+      <view class="notify-item">
+        <text class="notify-label">每周情书</text>
+        <switch checked="{{settings.weeklyNotify === 1}}" bindchange="toggleWeekly" color="#ff6b81"/>
+      </view>
+
+      <view class="notify-item">
+        <text class="notify-label">每月情书</text>
+        <switch checked="{{settings.monthlyNotify === 1}}" bindchange="toggleMonthly" color="#ff6b81"/>
+      </view>
+    </view>
+
+    <view class="divider-line"></view>
+
+    <view class="notify-section">
+      <view class="section-title">通知时间</view>
+
+      <view class="notify-item">
+        <text class="notify-label">发送时间</text>
+        <picker mode="time" bindchange="onTimeChange" value="{{settings.notifyTime}}">
+          <view class="picker-value">{{settings.notifyTime || '20:00'}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="divider-line"></view>
+
+    <view class="notify-section">
+      <view class="section-title">AI风格</view>
+
+      <view class="style-options">
+        <view class="style-item {{settings.aiStyle === 'romantic' ? 'active' : ''}}" bindtap="setStyle" data-style="romantic">
+          <text class="style-icon">💕</text>
+          <text class="style-name">浪漫深情</text>
+        </view>
+        <view class="style-item {{settings.aiStyle === 'poetic' ? 'active' : ''}}" bindtap="setStyle" data-style="poetic">
+          <text class="style-icon">📜</text>
+          <text class="style-name">古典诗意</text>
+        </view>
+        <view class="style-item {{settings.aiStyle === 'playful' ? 'active' : ''}}" bindtap="setStyle" data-style="playful">
+          <text class="style-icon">😜</text>
+          <text class="style-name">活泼俏皮</text>
+        </view>
+        <view class="style-item {{settings.aiStyle === 'warm' ? 'active' : ''}}" bindtap="setStyle" data-style="warm">
+          <text class="style-icon">☀️</text>
+          <text class="style-name">温暖治愈</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="divider-line"></view>
+
+    <view class="notify-section">
+      <view class="section-title">通知对象</view>
+
+      <view class="radio-group">
+        <view class="radio-item {{settings.notifyTarget === 1 ? 'active' : ''}}" bindtap="setTarget" data-value="1">仅自己</view>
+        <view class="radio-item {{settings.notifyTarget === 2 ? 'active' : ''}}" bindtap="setTarget" data-value="2">仅对象</view>
+        <view class="radio-item {{settings.notifyTarget === 3 ? 'active' : ''}}" bindtap="setTarget" data-value="3">双方</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn btn-primary btn-block mt-24" bindtap="save">保存设置</view>
+</view>

@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="filter-bar">
+    <scroll-view scroll-x class="filter-scroll">
+      <view class="filter-item {{currentMood === '' ? 'active' : ''}}" bindtap="filterMood" data-mood="">全部</view>
+      <view class="filter-item {{currentMood === '开心' ? 'active' : ''}}" bindtap="filterMood" data-mood="开心">😊 开心</view>
+      <view class="filter-item {{currentMood === '难过' ? 'active' : ''}}" bindtap="filterMood" data-mood="难过">😢 难过</view>
+      <view class="filter-item {{currentMood === '甜蜜' ? 'active' : ''}}" bindtap="filterMood" data-mood="甜蜜">😍 甜蜜</view>
+      <view class="filter-item {{currentMood === '生气' ? 'active' : ''}}" bindtap="filterMood" data-mood="生气">😤 生气</view>
+      <view class="filter-item {{currentMood === '疲惫' ? 'active' : ''}}" bindtap="filterMood" data-mood="疲惫">😴 疲惫</view>
+    </scroll-view>
+  </view>
+
+  <view class="moment-list">
+    <view class="moment-card card" wx:for="{{moments}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="moment-header flex-between">
+        <view class="moment-user">
+          <image class="mini-avatar" src="{{item.avatar_url || '/images/default-avatar.png'}}" mode="aspectFill"/>
+          <text class="mini-name">{{item.nickname}}</text>
+        </view>
+        <text class="moment-time">{{item.created_at}}</text>
+      </view>
+
+      <view class="moment-content" wx:if="{{item.content}}">{{item.content}}</view>
+
+      <view class="moment-images" wx:if="{{item.images && item.images.length > 0}}">
+        <view class="image-grid grid-{{item.images.length > 3 ? 3 : item.images.length}}">
+          <image wx:for="{{item.images}}" wx:for-item="img" wx:key="*this"
+                 class="grid-image" src="{{img}}?x-oss-process=image/resize,w_400" mode="aspectFill"/>
+        </view>
+      </view>
+
+      <view class="moment-footer flex-between">
+        <view class="moment-tags">
+          <text class="tag" wx:if="{{item.mood}}">{{item.mood}}</text>
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="moment-stats">
+          <text wx:if="{{item.comment_count > 0}}">💬 {{item.comment_count}}</text>
+          <text wx:if="{{item.like_count > 0}}">❤️ {{item.like_count}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && moments.length === 0}}">
+    <text>暂无点滴记录</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+
+  <view class="fab" bindtap="goToEdit">
+    <text class="fab-icon">+</text>
+  </view>
+</view>

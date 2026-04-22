@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="form-input" placeholder="请输入昵称" bindinput="onNicknameInput" value="{{nickname}}" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">手机号</text>
+      <input class="form-input" type="number" placeholder="请输入手机号" bindinput="onPhoneInput" value="{{phone}}" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="radio-group">
+        <view class="radio-item {{gender === 1 ? 'active' : ''}}" bindtap="setGender" data-value="1">男</view>
+        <view class="radio-item {{gender === 2 ? 'active' : ''}}" bindtap="setGender" data-value="2">女</view>
+        <view class="radio-item {{gender === 0 ? 'active' : ''}}" bindtap="setGender" data-value="0">保密</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn btn-primary btn-block mt-24" bindtap="save">保存</view>
+
+  <view class="danger-area mt-24">
+    <view class="danger-btn" bindtap="clearCache">清除缓存</view>
+  </view>
+</view>

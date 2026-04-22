@@ -1,0 +1,57 @@
+.bind-card {
+  padding: 40rpx;
+  text-align: center;
+}
+
+.bind-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16rpx;
+}
+
+.bind-desc {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 32rpx;
+  line-height: 1.6;
+}
+
+.bind-input {
+  height: 88rpx;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.code-card {
+  background: linear-gradient(135deg, var(--primary-light), #ffffff);
+  border: 2rpx solid var(--primary);
+}
+
+.code-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.code-number {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 16rpx;
+  margin: 24rpx 0;
+}
+
+.code-tips {
+  font-size: 24rpx;
+  color: var(--text-light);
+}
+
+.divider {
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--text-light);
+  margin: 32rpx 0;
+}

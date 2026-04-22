@@ -1,0 +1,93 @@
+.reminder-card {
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.reminder-header {
+  margin-bottom: 16rpx;
+}
+
+.reminder-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.reminder-type .tag {
+  font-size: 22rpx;
+}
+
+.reminder-info {
+  margin-bottom: 20rpx;
+}
+
+.info-row {
+  display: flex;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.info-label {
+  color: var(--text-light);
+  min-width: 140rpx;
+}
+
+.reminder-actions {
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 2rpx solid var(--border);
+}
+
+.status-toggle {
+  padding: 6rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  background: var(--bg);
+  color: var(--text-light);
+}
+
+.status-toggle.on {
+  background: #f6ffed;
+  color: var(--success);
+}
+
+.status-toggle.off {
+  background: #fff1f0;
+  color: var(--error);
+}
+
+.action-btns {
+  display: flex;
+  gap: 24rpx;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  color: var(--primary);
+}
+
+.action-btn.delete {
+  color: var(--error);
+}
+
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 160rpx;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+}
+
+.fab-icon {
+  color: #fff;
+  font-size: 48rpx;
+  font-weight: 300;
+}

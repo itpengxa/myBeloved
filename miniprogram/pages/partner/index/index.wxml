@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="partner-card card" wx:if="{{partner}}">
+    <view class="partner-avatar-wrap">
+      <image class="partner-avatar" src="{{partner.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"/>
+      <view class="heart-icon">❤️</view>
+    </view>
+    <view class="partner-name">{{partner.nickname || '心上人'}}</view>
+    <view class="partner-days">在一起 {{loveDays}} 天</view>
+    <view class="partner-date">绑定于 {{bindAt}}</view>
+  </view>
+
+  <view class="empty-card card" wx:if="{{!partner}}">
+    <view class="empty-icon">💔</view>
+    <view class="empty-text">还没有绑定对象</view>
+    <view class="btn btn-primary btn-block mt-24" bindtap="goToBind">去绑定</view>
+  </view>
+
+  <view class="action-list card" wx:if="{{partner}}">
+    <view class="action-item" bindtap="goToMoments">
+      <text class="action-icon">📝</text>
+      <text class="action-label">共同点滴</text>
+      <text class="action-arrow">›</text>
+    </view>
+    <view class="action-item" bindtap="goToLetters">
+      <text class="action-icon">💌</text>
+      <text class="action-label">情书记录</text>
+      <text class="action-arrow">›</text>
+    </view>
+    <view class="action-item danger" bindtap="unbind">
+      <text class="action-icon">💔</text>
+      <text class="action-label">解除绑定</text>
+      <text class="action-arrow">›</text>
+    </view>
+  </view>
+</view>

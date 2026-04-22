@@ -1,0 +1,60 @@
+.letter-card {
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(135deg, #fff5f7, #ffffff);
+  border: 2rpx solid var(--primary-light);
+}
+
+.letter-header {
+  margin-bottom: 20rpx;
+}
+
+.letter-meta {
+  display: flex;
+  align-items: center;
+}
+
+.letter-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.letter-date {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.letter-status {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  background: var(--bg);
+  color: var(--text-light);
+}
+
+.letter-status.sent {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.letter-preview {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.letter-footer {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid var(--border);
+}
+
+.letter-from {
+  font-size: 24rpx;
+  color: var(--text-light);
+}

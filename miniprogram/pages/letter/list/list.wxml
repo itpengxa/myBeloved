@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="letter-card card" wx:for="{{letters}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+    <view class="letter-header flex-between">
+      <view class="letter-meta">
+        <text class="letter-icon">💌</text>
+        <text class="letter-date">{{item.send_date}}</text>
+      </view>
+      <view class="letter-status {{item.send_status === 1 ? 'sent' : ''}}">
+        {{item.send_status === 1 ? '已送达' : '生成中'}}
+      </view>
+    </view>
+    <view class="letter-preview">{{item.letter_content}}</view>
+    <view class="letter-footer">
+      <text class="letter-from">From {{item.sender_nickname}} To {{item.receiver_nickname}}</text>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && letters.length === 0}}">
+    <text>还没有情书~</text>
+    <text class="text-secondary mt-8">每周会自动生成一封</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>

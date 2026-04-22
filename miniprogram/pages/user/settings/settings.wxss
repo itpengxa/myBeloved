@@ -1,0 +1,53 @@
+.form-item {
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid var(--border);
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text);
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.form-input {
+  height: 64rpx;
+  font-size: 28rpx;
+  color: var(--text);
+}
+
+.radio-group {
+  display: flex;
+  gap: 16rpx;
+}
+
+.radio-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+.radio-item.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.danger-area {
+  text-align: center;
+}
+
+.danger-btn {
+  display: inline-block;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  color: var(--error);
+}

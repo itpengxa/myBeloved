@@ -1,0 +1,90 @@
+.notify-section {
+  padding: 24rpx 0;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20rpx;
+}
+
+.notify-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.notify-label {
+  font-size: 28rpx;
+  color: var(--text);
+}
+
+.picker-value {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.divider-line {
+  height: 2rpx;
+  background: var(--border);
+  margin: 8rpx 0;
+}
+
+.style-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.style-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  border-radius: var(--radius);
+  background: var(--bg);
+  width: calc(50% - 8rpx);
+  box-sizing: border-box;
+}
+
+.style-item.active {
+  background: var(--primary-light);
+  border: 2rpx solid var(--primary);
+}
+
+.style-icon {
+  font-size: 48rpx;
+  margin-bottom: 8rpx;
+}
+
+.style-name {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.style-item.active .style-name {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.radio-group {
+  display: flex;
+  gap: 16rpx;
+}
+
+.radio-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+.radio-item.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}

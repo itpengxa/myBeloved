@@ -1,0 +1,52 @@
+<view class="container" wx:if="{{moment}}">
+  <view class="card">
+    <view class="detail-header flex-between">
+      <view class="detail-user">
+        <image class="detail-avatar" src="{{moment.avatar_url || '/images/default-avatar.png'}}" mode="aspectFill"/>
+        <view class="detail-user-meta">
+          <text class="detail-name">{{moment.nickname}}</text>
+          <text class="detail-time">{{moment.created_at}}</text>
+        </view>
+      </view>
+      <view class="detail-actions" wx:if="{{isOwner}}">
+        <text class="action-btn" bindtap="deleteMoment">删除</text>
+      </view>
+    </view>
+
+    <view class="detail-content" wx:if="{{moment.content}}">{{moment.content}}</view>
+
+    <view class="detail-images" wx:if="{{moment.images && moment.images.length > 0}}">
+      <image wx:for="{{moment.images}}" wx:key="*this"
+             class="detail-image" src="{{item}}?x-oss-process=image/resize,w_800"
+             mode="widthFix" bindtap="previewImage" data-url="{{item}}"/>
+    </view>
+
+    <view class="detail-location" wx:if="{{moment.location}}">
+      <text>📍 {{moment.location}}</text>
+    </view>
+
+    <view class="detail-tags">
+      <text class="tag" wx:if="{{moment.mood}}">{{moment.mood}}</text>
+      <text class="tag" wx:for="{{moment.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">评论 ({{moment.comments.length}})</view>
+
+  <view class="comment-list">
+    <view class="comment-item card" wx:for="{{moment.comments}}" wx:key="id">
+      <view class="comment-user">
+        <image class="comment-avatar" src="{{item.avatar_url || '/images/default-avatar.png'}}" mode="aspectFill"/>
+        <text class="comment-name">{{item.nickname}}</text>
+      </view>
+      <view class="comment-content">{{item.content}}</view>
+      <view class="comment-time">{{item.created_at}}</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{moment.comments.length === 0}}">
+    <text>还没有评论~</text>
+  </view>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中...</view>
