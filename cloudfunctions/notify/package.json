@@ -1,0 +1,10 @@
+{
+  "name": "notify",
+  "version": "1.0.0",
+  "description": "通知模块云函数",
+  "main": "index.js",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.0"
+  }
+}
