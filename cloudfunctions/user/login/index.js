@@ -1,6 +1,6 @@
-const pool = require('../../config/db');
-const { success, error } = require('../../utils/response');
-const { signToken } = require('../../utils/auth');
+const pool = require('../config/db');
+const { success, error } = require('../utils/response');
+const { signToken } = require('../utils/auth');
 const axios = require('axios');
 
 const APPID = process.env.WX_APPID;

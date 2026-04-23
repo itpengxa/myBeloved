@@ -1,8 +1,9 @@
 const RPCClient = require('@alicloud/pop-core').RPCClient;
-const { success, error } = require('../../utils/response');
-const { verifyToken } = require('../../utils/auth');
+const crypto = require('crypto');
+const { success, error } = require('../utils/response');
+const { verifyToken } = require('../utils/auth');
 
-const ossConfig = require('../../config/oss');
+const ossConfig = require('../config/oss');
 
 exports.main = async (event, context) => {
   const { token, fileType = 'moments' } = event;
@@ -34,11 +35,26 @@ exports.main = async (event, context) => {
 
     const result = await client.request('AssumeRole', params);
 
+    const creds = result.Credentials;
+    const expirationDate = new Date(Date.now() + ossConfig.durationSeconds * 1000).toISOString();
+
+    const policy = Buffer.from(JSON.stringify({
+      expiration: expirationDate,
+      conditions: [
+        ['content-length-range', 0, 104857600],
+        ['starts-with', '$key', `${fileType}/${userId}/`]
+      ]
+    })).toString('base64');
+
+    const signature = crypto.createHmac('sha1', creds.AccessKeySecret).update(policy).digest('base64');
+
     return success({
-      accessKeyId: result.Credentials.AccessKeyId,
-      accessKeySecret: result.Credentials.AccessKeySecret,
-      securityToken: result.Credentials.SecurityToken,
-      expiration: result.Credentials.Expiration,
+      accessKeyId: creds.AccessKeyId,
+      accessKeySecret: creds.AccessKeySecret,
+      securityToken: creds.SecurityToken,
+      expiration: creds.Expiration,
+      policy,
+      signature,
       bucket: ossConfig.bucket,
       endpoint: ossConfig.endpoint,
       region: ossConfig.region

@@ -32,16 +32,44 @@ Page({
 
   async updateAvatar() {
     try {
-      const { tempFiles } = await wx.chooseMedia({ count: 1, mediaType: ['image'] });
-      wx.showLoading({ title: '上传中...' });
-      // 简化处理，实际应上传至OSS
-      await app.callCloud('user/updateProfile', {
-        data: { avatarUrl: tempFiles[0].tempFilePath }
+      const res = await new Promise((resolve, reject) => {
+        wx.chooseMedia({ count: 1, mediaType: ['image'], success: resolve, fail: reject });
       });
+      const tempFilePath = res.tempFiles[0].tempFilePath;
+      wx.showLoading({ title: '上传中...' });
+
+      const ossConfig = await app.callCloud('moment/getOssToken', { fileType: 'avatars' });
+      const ext = tempFilePath.split('.').pop() || 'jpg';
+      const key = `avatars/${app.globalData.userInfo.id}/${Date.now()}.${ext}`;
+
+      const uploadRes = await new Promise((resolve, reject) => {
+        wx.uploadFile({
+          url: `https://${ossConfig.bucket}.${ossConfig.endpoint}`,
+          filePath: tempFilePath,
+          name: 'file',
+          formData: {
+            key,
+            policy: ossConfig.policy,
+            OSSAccessKeyId: ossConfig.accessKeyId,
+            signature: ossConfig.signature,
+            'x-oss-security-token': ossConfig.securityToken
+          },
+          success: resolve,
+          fail: reject
+        });
+      });
+
+      if (uploadRes.statusCode !== 200 && uploadRes.statusCode !== 204) {
+        throw new Error('头像上传失败');
+      }
+
+      const avatarUrl = `https://${ossConfig.bucket}.${ossConfig.endpoint}/${key}`;
+      await app.callCloud('user/updateProfile', { data: { avatarUrl } });
       this.loadData();
       wx.hideLoading();
     } catch (err) {
       wx.hideLoading();
+      wx.showToast({ title: err.message || '上传失败', icon: 'none' });
     }
   },
 

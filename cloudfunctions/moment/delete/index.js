@@ -1,6 +1,6 @@
-const pool = require('../../config/db');
-const { success, error } = require('../../utils/response');
-const { verifyToken } = require('../../utils/auth');
+const pool = require('../config/db');
+const { success, error } = require('../utils/response');
+const { verifyToken } = require('../utils/auth');
 
 exports.main = async (event, context) => {
   const { token, momentId } = event;

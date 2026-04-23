@@ -1,7 +1,7 @@
-const pool = require('../../config/db');
-const { success, error } = require('../../utils/response');
-const { buildLetterPrompt, buildRecommendationPrompt, generateLetter, generateRecommendations } = require('../../utils/kimiApi');
-const { sendSubscribeMessage } = require('../../utils/wxMessage');
+const pool = require('../config/db');
+const { success, error } = require('../utils/response');
+const { buildLetterPrompt, buildRecommendationPrompt, generateLetter, generateRecommendations } = require('../utils/kimiApi');
+const { sendSubscribeMessage } = require('../utils/wxMessage');
 
 const LETTER_TEMPLATE_ID = process.env.LETTER_TEMPLATE_ID || '';
 

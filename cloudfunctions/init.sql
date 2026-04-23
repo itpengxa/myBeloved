@@ -1,4 +1,5 @@
 -- 心上人 数据库初始化脚本
+-- 运行方式: mysql -u root -p < init.sql
 
 CREATE DATABASE IF NOT EXISTS xinshangren_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE xinshangren_db;

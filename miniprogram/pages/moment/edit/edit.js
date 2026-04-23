@@ -73,7 +73,7 @@ Page({
   },
 
   async uploadImages() {
-    const localImages = this.data.images.filter(img => img.startsWith('wxfile://') || img.startsWith('http://tmp'));
+    const localImages = this.data.images.filter(img => img.startsWith('wxfile://') || img.startsWith('http://tmp') || img.startsWith('blob:'));
     if (localImages.length === 0) return this.data.images;
 
     const ossConfig = await this.getOssToken();
@@ -83,23 +83,31 @@ Page({
       const ext = img.split('.').pop() || 'jpg';
       const key = `moments/${app.globalData.userInfo.id}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
 
-      await wx.uploadFile({
-        url: `https://${ossConfig.bucket}.${ossConfig.endpoint}`,
-        filePath: img,
-        name: 'file',
-        formData: {
-          key,
-          policy: '',
-          OSSAccessKeyId: ossConfig.accessKeyId,
-          signature: '',
-          'x-oss-security-token': ossConfig.securityToken
-        }
+      const res = await new Promise((resolve, reject) => {
+        wx.uploadFile({
+          url: `https://${ossConfig.bucket}.${ossConfig.endpoint}`,
+          filePath: img,
+          name: 'file',
+          formData: {
+            key,
+            policy: ossConfig.policy,
+            OSSAccessKeyId: ossConfig.accessKeyId,
+            signature: ossConfig.signature,
+            'x-oss-security-token': ossConfig.securityToken
+          },
+          success: resolve,
+          fail: reject
+        });
       });
 
-      uploadedUrls.push(`https://${ossConfig.bucket}.${ossConfig.endpoint}/${key}`);
+      if (res.statusCode === 200 || res.statusCode === 204) {
+        uploadedUrls.push(`https://${ossConfig.bucket}.${ossConfig.endpoint}/${key}`);
+      } else {
+        throw new Error('图片上传失败');
+      }
     }
 
-    const existing = this.data.images.filter(img => !(img.startsWith('wxfile://') || img.startsWith('http://tmp')));
+    const existing = this.data.images.filter(img => !(img.startsWith('wxfile://') || img.startsWith('http://tmp') || img.startsWith('blob:')));
     return existing.concat(uploadedUrls);
   },
 

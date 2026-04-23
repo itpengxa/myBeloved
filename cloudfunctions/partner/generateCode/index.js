@@ -1,6 +1,6 @@
-const pool = require('../../config/db');
-const { success, error } = require('../../utils/response');
-const { verifyToken } = require('../../utils/auth');
+const pool = require('../config/db');
+const { success, error } = require('../utils/response');
+const { verifyToken } = require('../utils/auth');
 
 function generateBindCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
